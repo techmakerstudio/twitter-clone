@@ -10,7 +10,7 @@ function Post(props) {
   })
   const [content, _setContent] = useState(itemContent.content.body)
 
-  console.log(JSON.parse(props.post.item_content))
+  // console.log(props.post)
 
   return (
     <div className='post card my-2'>
