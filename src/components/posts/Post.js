@@ -11,22 +11,33 @@ function Post(props) {
   const [content, _setContent] = useState(itemContent.content.body)
 
   // console.log(props.post)
+  const shouldDisplay = (content) => {
+    return content != '' && content != undefined
+  }
 
   return (
-    <div className='post card my-2'>
-      <div className='card-body'>
-        <div className='row'>
-          <div className='col-2'>
-            <img src={pfp} className='pfp' />
-          </div>
-          <div className='col-10'>
-            <p className='user mb-0'>
-              <b>{address}</b><span className='time'> · {timePosted}</span>
-            </p>
-            <p>{content}</p>
+    <div>
+      { 
+        shouldDisplay(content) ?
+        <div className='post card my-3'>
+          <div className='card-body'>
+            <div className='row'>
+              <div className='col-2'>
+                <img src={pfp} className='pfp' />
+              </div>
+              <div className='col-10'>
+                <p className='user mb-0'>
+                  <b>{address}</b><span className='time'> · {timePosted}</span>
+                </p>
+                <p>{content}</p>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+        :
+        ''
+      }
+      
     </div>
   );
 }

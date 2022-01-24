@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600&display=swap');
+
+$grey-5: #0d0f13;
+$grey-4: #14171d;
+$grey-3: #222529;
+$grey-2: #4d545f;
+$grey-1: #555d69;
+
+$teal-4: #008d94;
+$teal-3: #00ADB5;
+$teal-2: #00ced8;
+$teal-1: #00FFF5;
+
+body {
+  background-color: $grey-4;
+}
+
+// .overlay {
+//   position: fixed;
+//   background-image: linear-gradient(225deg, #390d26 0%, #1f132a 50%, #021c2d 100%);  
+//   height: 100vh;
+//   width: 100%;
+//   z-index: -1;
+// }
+
+h1, h2, h3, h4, h5, h6, p, span, div, ul, li, ol {
+  font-family: 'Source Sans Pro', sans-serif;
+  color: white;
+}
+
+.card {
+  background-color: $grey-3;
+  border-radius: 15px;
+  // -webkit-box-shadow: 0 16px 24px 2px rgb(0 0 0 / 17%), 0 6px 30px 5px rgb(0 0 0 / 15%), 0 8px 10px -7px rgb(0 0 0 / 23%);
+  // box-shadow: 0 16px 24px 2px rgb(0 0 0 / 17%), 0 6px 30px 5px rgb(0 0 0 / 15%), 0 8px 10px -7px rgb(0 0 0 / 23%);
+}
+
+.time {
+  color: #8e8e8e;
+}
+
+.pfp {
+  width: 80%;
+  border-radius: 50%;
+}
+
+.btn-primary {
+  background-color: $teal-3;
+  border: none;
+  box-shadow: none !important;
+  &:focus {
+    background-color: $teal-3;
+  }
+  &:hover {
+    background-color: $teal-4;
+  }
+
+  &:disabled {
+    background-color: $teal-2;
+  }
+}
+
+.btn-post {
+  font-size: 18px;
+  padding: 12px 25px;
+}
+
+.btn {
+  border-radius: 15px;
+}
+
+.modal-content {
+  border-radius: 15px;
+  background-color: $grey-3;
+  textarea {
+    background-color: $grey-3 !important;
+    color: white !important;
+    border: none;
+    border-radius: 10px;
+    box-shadow: none !important;
+    resize: none;
+  }
+}
+
+.modal-footer {
+  border-top-color: $grey-3;
+}
+
+.modal-header {
+  border-bottom: none;
+
+  a {
+    color: white;
+    text-decoration: none;
+    font-size: 2rem;
+  }
+}
+
+.lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid $teal-1;
+  border-color: $teal-1 transparent $teal-1 transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.account-btn {
+  text-align: center;
+  font-size: 1.2rem;
+  background-color: $grey-5;
+  border-radius: 15px;
+}

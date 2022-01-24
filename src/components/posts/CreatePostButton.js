@@ -1,10 +1,15 @@
 function CreatePostButton(props) {
 
-  return (
-    <div>
+  const openModal = (e) => {
+    e.preventDefault()
+    props.setModalOpen(true)
+  }
 
-      <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Launch demo modal
+  return (
+    <div className='d-grid gap-2'>
+
+      <button type="button" className="btn btn-primary btn-lg btn-post" onClick={openModal}>
+        Post Something
       </button>
 
       

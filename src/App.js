@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import './App.css';
+import './App.scss';
 import Navbar from './components/Navbar';
 import AccountButton from './components/AccountButton';
 
@@ -11,6 +11,8 @@ function App(props) {
   const [web3, setWeb3] = useState()
   const [alephAccount, setAlephAccount] = useState()
   const [walletAddress, setWalletAddress] = useState()
+
+  const [modalOpen, setModalOpen] = useState(false)
 
   const connectWallet = async (e) => {
     const { alephAccount, web3 } = await props.connectWeb3(e)
@@ -61,18 +63,27 @@ function App(props) {
 
   return (
     <div className="App">
-      <div className='overlay'></div>
-      <Navbar />
+      {/* <div className='overlay'></div> */}
+      <Navbar setModalOpen={setModalOpen} />
       <AccountButton connectWallet={connectWallet} walletAddress={walletAddress} truncateAddress={truncateAddress} />
       <div className='container'>
         <div className='row'>
           <div className='col-6 offset-3'>
-            <Posts truncateAddress={truncateAddress} timeSince={timeSince} />
+            <Posts 
+              truncateAddress={truncateAddress} 
+              timeSince={timeSince}
+              setModalOpen={setModalOpen}
+              walletAddress={walletAddress}
+            />
           </div>
         </div>
       </div>
 
-      <PostFormModal alephAccount={alephAccount} />
+      <PostFormModal 
+        alephAccount={alephAccount} 
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
+      />
     </div>
   );
 }

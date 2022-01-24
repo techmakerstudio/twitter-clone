@@ -10,12 +10,15 @@ function Posts(props) {
 
   const loadPosts = async () => {
     const response = await posts.get_posts('chat', {'refs': ['hall'] })
+
     setLoadedPosts(response.posts)  
   }
 
   useEffect(() => {
     loadPosts()
   }, [])
+
+  
 
   useEffect(() => {
     if (loadedPosts.length > 0 && !socketConnected) {
@@ -26,6 +29,10 @@ function Posts(props) {
       connection.onmessage = (e) => { 
         let post = JSON.parse(e.data)
         if (post.item_content && post.content.type == 'chat') {
+
+          if (post.content.address == props.walletAddress) {
+            props.setModalOpen(false)
+          }
           
           const hash = post.item_hash
 
@@ -45,7 +52,7 @@ function Posts(props) {
 
   return (
     <div className='posts'>
-      <h1 className='mt-5 mb-4'>👋 Hello!</h1>
+      {/* <h1 className='mt-5 mb-4'>👋 Hello!</h1> */}
       { loadedPosts.map((post) => <Post key={post.item_hash} post={post} truncateAddress={props.truncateAddress} timeSince={props.timeSince} />)}
     </div>    
   );

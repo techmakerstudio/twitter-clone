@@ -6,9 +6,13 @@ function AccountButton(props) {
         <div className='col-3'>
           {
             props.walletAddress ?
-            props.truncateAddress(props.walletAddress)
+            <div className='account-btn me-3 py-2 mb-2'>
+              {props.truncateAddress(props.walletAddress)}
+            </div>
             :
-            <a className="btn btn-primary" aria-current="page" href="#" onClick={props.connectWallet}>Connect Wallet</a>
+            <div className='d-grid gap-2'>
+              <a className="btn btn-dark btn-lg me-3 mb-2" aria-current="page" href="#" onClick={props.connectWallet}>Connect Wallet</a>
+            </div>
           }
         </div>
       </div>
