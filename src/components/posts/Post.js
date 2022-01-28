@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import pfp from '../../images/pleb.jpg'
 
+import { Link } from 'react-router-dom'
+
 function Post(props) {
 
   const [itemContent, _setItemContent] = useState(JSON.parse(props.post.item_content))
@@ -19,21 +21,23 @@ function Post(props) {
     <div>
       { 
         shouldDisplay(content) ?
-        <div className='post card my-3'>
-          <div className='card-body'>
-            <div className='row'>
-              <div className='col-2'>
-                <img src={pfp} className='pfp' />
-              </div>
-              <div className='col-10'>
-                <p className='user mb-0'>
-                  <b>{address}</b><span className='time'> · {timePosted}</span>
-                </p>
-                <p>{content}</p>
+        <Link to={`/posts/${props.post.item_hash}`}>
+          <div className='post card my-3'>
+            <div className='card-body'>
+              <div className='row'>
+                <div className='col-2'>
+                  <img src={pfp} className='pfp' />
+                </div>
+                <div className='col-10'>
+                  <p className='user mb-0'>
+                    <b>{address}</b><span className='time'> · {timePosted}</span>
+                  </p>
+                  <p>{content}</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </Link>
         :
         ''
       }

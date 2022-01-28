@@ -1,4 +1,4 @@
-import { posts } from 'aleph-js'
+import PostModel from '../../models/PostModel'
 import { useState, useEffect } from 'react'
 
 import Post from './Post'
@@ -9,9 +9,8 @@ function Posts(props) {
   const [socketConnected, setSocketConnected] = useState(false)
 
   const loadPosts = async () => {
-    const response = await posts.get_posts('chat', {'refs': ['hall'] })
-
-    setLoadedPosts(response.posts)  
+    const posts = await PostModel.timeline()
+    setLoadedPosts(posts)  
   }
 
   useEffect(() => {
@@ -22,13 +21,13 @@ function Posts(props) {
 
   useEffect(() => {
     if (loadedPosts.length > 0 && !socketConnected) {
-      const url = 'wss://api2.aleph.im/api/ws0/messages?contentTypes=chat'
+      const url = 'wss://api2.aleph.im/api/ws0/messages?contentTypes=techmaker-posts'
   
       const connection = new WebSocket(url) 
   
       connection.onmessage = (e) => { 
         let post = JSON.parse(e.data)
-        if (post.item_content && post.content.type == 'chat') {
+        if (post.item_content && post.content.type == 'techmaker-posts') {
 
           if (post.content.address == props.walletAddress) {
             props.setModalOpen(false)

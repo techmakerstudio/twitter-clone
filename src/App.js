@@ -1,10 +1,18 @@
 import { useState, useEffect } from 'react';
+
+import { 
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from 'react-router-dom';
+
 import './App.scss';
 import Navbar from './components/Navbar';
 import AccountButton from './components/AccountButton';
 
 import Posts from './components/posts/Posts';
 import PostFormModal from './components/posts/PostFormModal';
+import ShowPost from './components/posts/ShowPost';
 
 function App(props) {
 
@@ -63,27 +71,39 @@ function App(props) {
 
   return (
     <div className="App">
-      {/* <div className='overlay'></div> */}
-      <Navbar setModalOpen={setModalOpen} />
-      <AccountButton connectWallet={connectWallet} walletAddress={walletAddress} truncateAddress={truncateAddress} />
-      <div className='container'>
-        <div className='row'>
-          <div className='col-6 offset-3'>
-            <Posts 
-              truncateAddress={truncateAddress} 
-              timeSince={timeSince}
-              setModalOpen={setModalOpen}
-              walletAddress={walletAddress}
-            />
+      <Router>
+        {/* <div className='overlay'></div> */}
+        <Navbar setModalOpen={setModalOpen} />
+        <AccountButton connectWallet={connectWallet} walletAddress={walletAddress} truncateAddress={truncateAddress} />
+        <div className='container'>
+          <div className='row'>
+            <div className='col-6 offset-3'>
+              <Switch>
+                <Route path="/" exact>
+                  <Posts 
+                    truncateAddress={truncateAddress} 
+                    timeSince={timeSince}
+                    setModalOpen={setModalOpen}
+                    walletAddress={walletAddress}
+                  />
+                </Route>
+                <Route path="/posts/:item_hash">
+                  <ShowPost 
+                    timeSince={timeSince} 
+                    truncateAddress={truncateAddress}
+                  />
+                </Route>
+              </Switch>
+            </div>
           </div>
         </div>
-      </div>
 
-      <PostFormModal 
-        alephAccount={alephAccount} 
-        modalOpen={modalOpen}
-        setModalOpen={setModalOpen}
-      />
+        <PostFormModal 
+          alephAccount={alephAccount} 
+          modalOpen={modalOpen}
+          setModalOpen={setModalOpen}
+        />
+      </Router>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { posts } from 'aleph-js'
 import { useState, useEffect } from 'react'
 import Modal from "react-bootstrap/Modal";
+import PostModel from '../../models/PostModel';
 
 function PostFormModal(props) {
 
@@ -28,18 +29,8 @@ function PostFormModal(props) {
     e.preventDefault()
 
     setTxInProgress(true)
-    
-    posts.submit(
-      props.alephAccount.address,
-      'chat',
-      {'body': postContent},
-      {
-        'account': props.alephAccount,
-        'channel': 'TEST',
-        'api_server': 'https://api2.aleph.im',
-        'ref': 'hall'
-      }
-    ).catch((error) => {
+
+    PostModel.create(props.alephAccount.address, postContent, props.alephAccount).catch((error) => {
       setTxInProgress(false)
     })
   }
@@ -53,7 +44,7 @@ function PostFormModal(props) {
         txInProgress ?
         <Modal.Body>
           <div className="p-5 text-center mb-5">
-            <div class="lds-dual-ring"></div>
+            <div className="lds-dual-ring"></div>
             <p className='mt-2'>Please confirm in your wallet.</p>
           </div>
         </Modal.Body>
